@@ -1,25 +1,24 @@
 import { initializeApp } from "firebase/app";
 import {
   getAuth,
-  signInWithRedirect,
   signInWithPopup,
+  signInWithRedirect,
   GoogleAuthProvider,
 } from "firebase/auth";
-
 import { getFirestore, doc, getDoc, setDoc } from "firebase/firestore";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyCWAEqpapkFGpQOcEnIBh7NdPG6ssuniC0",
-  authDomain: "crwn-clothing-db-c4d83.firebaseapp.com",
-  projectId: "crwn-clothing-db-c4d83",
-  storageBucket: "crwn-clothing-db-c4d83.appspot.com",
-  messagingSenderId: "531904814198",
-  appId: "1:531904814198:web:f68c4181b1a87ce8cb1357",
+  apiKey: "AIzaSyDHg9ONpR0dOlek8AyWBHJuye3RD94l6K4",
+  authDomain: "crwn-clothing-db-88df3.firebaseapp.com",
+  projectId: "crwn-clothing-db-88df3",
+  storageBucket: "crwn-clothing-db-88df3.appspot.com",
+  messagingSenderId: "205701615678",
+  appId: "1:205701615678:web:6f181d586d4c6a935a016f",
 };
 
 const firebaseApp = initializeApp(firebaseConfig);
-
 const provider = new GoogleAuthProvider();
+
 provider.setCustomParameters({
   prompt: "select_account",
 });
@@ -27,24 +26,23 @@ provider.setCustomParameters({
 export const auth = getAuth();
 export const signInWithGooglePopup = () => signInWithPopup(auth, provider);
 
-export const db = getFirestore();
+export const db = getFirestore(firebaseApp);
 
-export const createUserDocumentFromAuth = async (userAuth) => {
-  const userDocref = doc(db, "users", userAuth.uid);
-  console.log(userDocref);
-  const userSnapShot = await getDoc(userDocref);
-  console.log(userSnapShot);
-  console.log(userSnapShot.exists());
-
-  if (!userSnapShot.exists()) {
-    const { displayName, email } = userAuth;
-    const createdAt = new Date();
+export const createUserFromAuth = async (userAuth) => {
+  const userDocRef = doc(db, "users", userAuth.uid);
+  const userSnapshot = await getDoc(userDocRef);
+  const userData = {
+    displayName: userAuth.displayName,
+    userId: userAuth.uid,
+    createAt: new Date(),
+  };
+  if (!userSnapshot.exists()) {
     try {
-      await setDoc(userDocref, { displayName, email, createdAt });
+      await setDoc(userDocRef, userData);
     } catch (error) {
-      console.log("error creating the user", error.message);
+      console.log(`error creating the user ${error.message}`);
+      console.log(error.code);
     }
+    return userDocRef;
   }
-
-  return userDocref;
 };
