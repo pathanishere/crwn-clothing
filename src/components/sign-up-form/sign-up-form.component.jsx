@@ -1,11 +1,11 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
 import {
   createUserAuthFromEmailAndPassword,
   createUserFromAuth,
 } from "../../utils/firebase/firebase.utils";
 
 import FormInput from "../../components/form-input/form-input.component";
-import Button from "../../components/button.component/button.component";
+import Button from "../../components/button/button.component";
 
 import "./sign-up-form.style.scss";
 
@@ -17,7 +17,6 @@ const SignUpForm = () => {
     confirmPassword: "",
   };
 
-  console.log();
   const [formFields, setFormFields] = useState(defaultFormField);
   const { displayName, email, password, confirmPassword } = formFields;
 

@@ -1,12 +1,11 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
 import {
   signInWithGooglePopup,
-  createUserFromAuth,
   signInUserAuthFromEmailAndPassword,
 } from "../../utils/firebase/firebase.utils";
 
 import FormInput from "../../components/form-input/form-input.component";
-import Button from "../../components/button.component/button.component";
+import Button from "../../components/button/button.component";
 
 import "./sign-in-form.style.scss";
 
@@ -35,11 +34,10 @@ const SignInForm = () => {
   const onSubmitHandler = async (e) => {
     e.preventDefault();
     try {
-      const response = await signInUserAuthFromEmailAndPassword(
+      const { user } = await signInUserAuthFromEmailAndPassword(
         email,
         password
       );
-      console.log(response);
     } catch (error) {
       switch (error.code) {
         case "auth/wrong-password":
