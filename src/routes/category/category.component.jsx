@@ -1,7 +1,7 @@
 import { useContext, useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 
-import "./category.style.scss";
+import { CategoryContainer } from "./category.style";
 
 import { CategoriesContext } from "../../contexts/categories.context";
 
@@ -17,12 +17,12 @@ const Category = () => {
   }, [categoriesMap, category]);
 
   return (
-    <div className="category-container">
+    <CategoryContainer>
       {products &&
         products.map((product) => {
           return <ProductCard key={product.id} product={product} />;
         })}
-    </div>
+    </CategoryContainer>
   );
 };
 
