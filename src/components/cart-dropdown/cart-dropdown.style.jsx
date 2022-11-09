@@ -1,4 +1,6 @@
-.cart-dropdown-container {
+import styled from "styled-components";
+
+export const CartDropdownContainer = styled.div`
   position: absolute;
   width: 280px;
   height: 380px;
@@ -16,14 +18,14 @@
     margin: 50px auto;
   }
 
-  .cart-items {
-    height: 280px;
-    display: flex;
-    flex-direction: column;
-    overflow-y: scroll;
-  }
-
   button {
     margin-top: auto;
   }
-}
+`;
+
+export const CartItems = styled.div`
+  height: 280px;
+  display: flex;
+  flex-direction: column;
+  overflow-y: scroll;
+`;

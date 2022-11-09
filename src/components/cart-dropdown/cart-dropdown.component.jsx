@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 
 import Button from "../button/button.component";
 import CartItem from "../../components/cart-item/cart-item.component";
-import "./cart-dropdown.style.scss";
+import { CartDropdownContainer, CartItems } from "./cart-dropdown.style";
 
 import { CartContext } from "../../contexts/cart.context";
 
@@ -17,14 +17,14 @@ const CartDropDown = () => {
   };
 
   return (
-    <div className="cart-dropdown-container">
-      <div className="cart-items">
+    <CartDropdownContainer>
+      <CartItems>
         {cartItems.map((cartItem) => {
           return <CartItem key={cartItem.id} cartItem={cartItem} />;
         })}
-      </div>
+      </CartItems>
       <Button onClick={navigationHandler}>Got to checkout</Button>
-    </div>
+    </CartDropdownContainer>
   );
 };
 

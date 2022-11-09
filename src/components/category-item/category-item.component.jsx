@@ -1,9 +1,9 @@
-import "./category-item.style.scss";
+import { CategoryContainer } from "./category-item.style";
 
 const CategoryItem = ({ category }) => {
   const { title, imageUrl } = category;
   return (
-    <div className="category-container">
+    <CategoryContainer>
       <div
         className="background-image"
         style={{ backgroundImage: `url(${imageUrl})` }}
@@ -12,7 +12,7 @@ const CategoryItem = ({ category }) => {
         <h2>{title}</h2>
         <p>Shop Now</p>
       </div>
-    </div>
+    </CategoryContainer>
   );
 };
 
